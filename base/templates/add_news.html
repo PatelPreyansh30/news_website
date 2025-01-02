@@ -1,0 +1,29 @@
+{% extends 'home.html' %} {% block content %}
+<h1>Add News</h1>
+<form action="/add-news" method="post">
+  <div>
+    <label for="headline">Headline:</label>
+    <input type="text" id="headline" name="headline" />
+  </div>
+  <div>
+    <label for="author">Author Name:</label>
+    <input type="text" id="author" name="author" />
+  </div>
+  <div>
+    <label for="description">Description:</label>
+    <textarea name="description" id="description"></textarea>
+  </div>
+  <div>
+    <label for="category">News Category:</label>
+    <select name="category" id="category">
+      <option value="general">General</option>
+      <option value="lifestyle">Lifestyle</option>
+      <option value="travel">Travel</option>
+      <option value="sports">Sports</option>
+      <option value="other">Other</option>
+    </select>
+  </div>
+  <button type="submit">Submit</button>
+  <button type="reset">Reset</button>
+</form>
+{% endblock %}
