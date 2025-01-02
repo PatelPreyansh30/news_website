@@ -1,5 +1,12 @@
+<h4><a href="/">The BroadCast</a></h4>
+
 <ul>
   <li><a href="/">Home</a></li>
   <li><a href="/news">News</a></li>
   <li><a href="/contact-us">Contact Us</a></li>
+  <li><a href="/login">Login</a></li>
 </ul>
+
+{% if user %}
+<span>Welcome, Firstname</span>
+{% endif %}
