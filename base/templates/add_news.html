@@ -3,24 +3,24 @@
 <form action="/add-news" method="post">
   <div>
     <label for="headline">Headline:</label>
-    <input type="text" id="headline" name="headline" required />
+    <input type="text" id="headline" name="headline" value="{{ news.headline }}" required />
   </div>
   <div>
     <label for="author">Author Name:</label>
-    <input type="text" id="author" name="author" required />
+    <input type="text" id="author" name="author" value="{{ news.author_name }}" required />
   </div>
   <div>
     <label for="description">Description:</label>
-    <textarea name="description" id="description" required></textarea>
+    <textarea name="description" id="description" required>{{ news.description }}</textarea>
   </div>
   <div>
     <label for="category">News Category:</label>
     <select name="category" id="category" required>
-      <option value="general">General</option>
-      <option value="lifestyle">Lifestyle</option>
-      <option value="travel">Travel</option>
-      <option value="sports">Sports</option>
-      <option value="other">Other</option>
+      <option value="general" {{ "selected" if news.category=="general" }}>General</option>
+      <option value="lifestyle" {{ "selected" if news.category=="lifestyle" }}>Lifestyle</option>
+      <option value="travel" {{ "selected" if news.category=="travel" }}>Travel</option>
+      <option value="sports" {{ "selected" if news.category=="sports" }}>Sports</option>
+      <option value="other" {{ "selected" if news.category=="other" }}>Other</option>
     </select>
   </div>
   <button type="submit">Submit</button>

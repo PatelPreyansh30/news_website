@@ -20,6 +20,14 @@ def news():
     return render_template("news.html", show_navigation=True, user=session.get('user'), news=news)
 
 
+@app.route("/edit", methods=['GET'])
+def news_edit():
+    id = request.args.get("news")
+    news_dao = NewsDAO()
+    news = news_dao.get(id)
+    return render_template("add_news.html", show_navigation=True, user=session.get('user'), news=news)
+
+
 @app.route("/add-news", methods=['GET', 'POST'])
 def add_news():
     if request.method == 'GET' and session.get('user') is not None:

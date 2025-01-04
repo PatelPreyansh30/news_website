@@ -10,7 +10,7 @@
         {% for i in news %}
         <li>
             {{ i.headline }} by {{ i.author_name }}
-            {% if user.is_admin %}
+            {% if user.is_admin %} - 
             <a href="/edit?news={{ i.id }}">Edit</a>
             {% endif %}
         </li>

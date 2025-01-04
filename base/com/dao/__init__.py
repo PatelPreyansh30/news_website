@@ -41,3 +41,6 @@ class NewsDAO:
         
     def view(self):
         return NewsVO.query.all()
+    
+    def get(self, id):
+        return NewsVO.query.get(id)
