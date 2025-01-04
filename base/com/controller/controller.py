@@ -1,31 +1,39 @@
-from flask import render_template, redirect, request, flash
+from flask import render_template, redirect, request, flash, session
 from base import app
-from base.com.vo import UserVO
-from base.com.dao import UserDAO
-
+from base.com.vo import UserVO, NewsVO
+from base.com.dao import UserDAO, NewsDAO
 
 @app.route("/", methods=['GET'])
 def home():
-    return render_template('home.html', show_navigation=True)
+    return render_template('home.html', show_navigation=True, user=session.get('user'))
 
 
 @app.route("/contact-us", methods=['GET'])
 def contact_us():
-    return render_template('contact.html', show_navigation=True)
+    return render_template('contact.html', show_navigation=True, user=session.get('user'))
 
 
 @app.route("/news", methods=['GET'])
 def news():
-    return render_template("news.html", show_navigation=True)
+    news_dao = NewsDAO()
+    news = news_dao.view()
+    return render_template("news.html", show_navigation=True, user=session.get('user'), news=news)
 
 
 @app.route("/add-news", methods=['GET', 'POST'])
 def add_news():
-    if request.method == 'GET':
-        return render_template("add_news.html", show_navigation=True)
+    if request.method == 'GET' and session.get('user') is not None:
+        return render_template("add_news.html", show_navigation=True, user=session.get('user'))
     elif request.method == 'POST':
-        pass
-
+        news_vo = NewsVO()
+        news_dao = NewsDAO()
+        news_vo.headline = request.form.get('headline')
+        news_vo.author_name = request.form.get('author')
+        news_vo.description = request.form.get('description')
+        news_vo.category = request.form.get('category')
+        news_dao.insert(news_vo)
+        flash("News added successfully.")
+        return redirect("/news")
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -57,4 +65,12 @@ def login():
         if not user:
             flash("Invalid Credentials")
             return redirect("/login")
+        session['user'] = user.as_dict()
         return redirect("/")
+    
+    
+@app.route("/logout", methods=['GET'])
+def logout():
+    flash("Logout successfully")
+    session.clear()
+    return redirect("/")

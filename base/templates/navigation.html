@@ -4,9 +4,13 @@
   <li><a href="/">Home</a></li>
   <li><a href="/news">News</a></li>
   <li><a href="/contact-us">Contact Us</a></li>
-  <li><a href="/login">Login</a></li>
+  {% if not user %}
+    <li><a href="/login">Login</a></li>
+  {% else %}
+    <li><a href="/logout">Logout</a></li>
+  {% endif %}
 </ul>
 
 {% if user %}
-<span>Welcome, Firstname</span>
+<span>Welcome, {{ user.first_name }}</span>
 {% endif %}

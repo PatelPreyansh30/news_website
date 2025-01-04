@@ -1,5 +1,5 @@
 from base import db
-from base.com.vo import UserVO
+from base.com.vo import UserVO, NewsVO
 
 class UserDAO:
     def insert(self, vo_obj):
@@ -32,3 +32,12 @@ class UserDAO:
     # def order_by_category(self, category_vo):
     #     category_vo_obj = CategoryVO.query.order_by(asc(category_vo.category_name))
     #     return category_vo_obj
+    
+    
+class NewsDAO:
+    def insert(self, vo_obj):
+        db.session.add(vo_obj)
+        db.session.commit()
+        
+    def view(self):
+        return NewsVO.query.all()

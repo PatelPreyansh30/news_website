@@ -18,5 +18,23 @@ class UserVO(db.Model):
             'password': self.password,
             'is_admin': self.is_admin
         }
+        
+        
+class NewsVO(db.Model):
+    __tablename__ = 'news'
+    id = db.Column('id', db.Integer, primary_key = True, autoincrement = True)
+    headline = db.Column('headline', db.String(255), nullable= False)
+    author_name = db.Column('author_name', db.String(255), nullable= False)
+    category = db.Column('category', db.String(255), nullable= False)
+    description = db.Column('description', db.Text(), nullable= False)
+
+    def as_dict(self):
+        return {
+            'id': self.id,
+            'headline': self.headline,
+            'author_name': self.author_name,
+            'category': self.category,
+            'description': self.description
+        }
 
 db.create_all()

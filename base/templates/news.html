@@ -1,3 +1,21 @@
-{% extends 'home.html' %} {% block content %}
-<h4><a href="/add-news">Add News</a></h4>
+{% extends 'home.html' %} 
+
+{% block content %}
+{% if user %}
+    <h4><a href="/add-news">Add News</a></h4>
+{% endif %}
+
+<div>
+    <ul>
+        {% for i in news %}
+        <li>
+            {{ i.headline }} by {{ i.author_name }}
+            {% if user.is_admin %}
+            <a href="/edit?news={{ i.id }}">Edit</a>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
 {% endblock %}
