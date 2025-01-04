@@ -31,7 +31,7 @@ def news_edit():
 @app.route("/add-news", methods=['GET', 'POST'])
 def add_news():
     if request.method == 'GET' and session.get('user') is not None:
-        return render_template("add_news.html", show_navigation=True, user=session.get('user'))
+        return render_template("add_news.html", show_navigation=True, user=session.get('user'), news=None)
     elif request.method == 'POST':
         news_vo = NewsVO()
         news_dao = NewsDAO()
