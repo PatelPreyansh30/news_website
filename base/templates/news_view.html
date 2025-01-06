@@ -1,0 +1,8 @@
+{% extends 'home.html' %} 
+
+{% block content %}
+<h3>{{ news.headline }}</h3>
+<p>Author: {{ news.author_name }}</p>
+<p>Category: {{ news.category }}</p>
+<p>{{ news.description }}</p>
+{% endblock %}

@@ -5,11 +5,12 @@
     <h4><a href="/add-news">Add News</a></h4>
 {% endif %}
 
+<h4>Latest News</h4>
 <div>
     <ul>
         {% for i in news %}
         <li>
-            {{ i.headline }} by {{ i.author_name }}
+            <a href="/view?news={{ i.id }}">{{ i.headline }} by {{ i.author_name }}</a>
             {% if user.is_admin %} - 
             <a href="/edit?news={{ i.id }}">Edit</a>
             {% endif %}
