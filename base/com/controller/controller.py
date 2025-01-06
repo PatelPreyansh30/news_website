@@ -36,6 +36,16 @@ def news_edit():
     return render_template("news_add.html", show_navigation=True, user=session.get('user'), news=news)
 
 
+@app.route("/delete", methods=['GET'])
+def news_delete():
+    id = request.args.get("news")
+    news_dao = NewsDAO()
+    news = news_dao.get(id)
+    news_dao.delete(news)
+    flash("News deleted successfully")
+    return redirect('/news')
+
+
 @app.route("/add-news", methods=['GET', 'POST'])
 def add_news():
     if request.method == 'GET' and session.get('user') is not None:
@@ -47,9 +57,15 @@ def add_news():
         news_vo.author_name = request.form.get('author')
         news_vo.description = request.form.get('description')
         news_vo.category = request.form.get('category')
-        news_dao.insert(news_vo)
-        flash("News added successfully.")
+        if request.form.get('id'):
+            news_vo.id = request.form.get('id')
+            news_dao.update(news_vo)
+            flash("News update successfully.")
+        else:
+            news_dao.insert(news_vo)
+            flash("News added successfully.")
         return redirect("/news")
+
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():

@@ -38,6 +38,14 @@ class NewsDAO:
     def insert(self, vo_obj):
         db.session.add(vo_obj)
         db.session.commit()
+
+    def update(self, vo_obj):
+        db.session.merge(vo_obj)
+        db.session.commit()
+    
+    def delete(self, vo_obj):
+        db.session.delete(vo_obj)
+        db.session.commit()
         
     def view(self):
         return NewsVO.query.all()

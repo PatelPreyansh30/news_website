@@ -1,6 +1,7 @@
 {% extends 'home.html' %} {% block content %}
 <h1>Add News</h1>
 <form action="/add-news" method="post">
+  <input type="hidden" name="id" value="{{ news.id }}">
   <div>
     <label for="headline">Headline:</label>
     <input type="text" id="headline" name="headline" value="{{ news.headline }}" required />

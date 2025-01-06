@@ -13,6 +13,8 @@
             <a href="/view?news={{ i.id }}">{{ i.headline }} by {{ i.author_name }}</a>
             {% if user.is_admin %} - 
             <a href="/edit?news={{ i.id }}">Edit</a>
+             - 
+            <a href="/delete?news={{ i.id }}">Delete</a>
             {% endif %}
         </li>
         {% endfor %}
